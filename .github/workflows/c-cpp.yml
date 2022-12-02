@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: run centos7
+      run: docker run -itd -v /root/minicrt:/tmp/minicrt --name centos7Instance --net=host docker.io/centos:7 /bin/bash
     - name: make
-      run: make
+      run: docker exec centos7Instance cd /tmp/minicrt && docker exec centos7Instance make
     - name: make check
-      run: make check
+      run: docker exec centos7Instance make check
