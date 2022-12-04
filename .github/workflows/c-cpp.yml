@@ -10,13 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    container: docker.io/centos:7
     steps:
     - uses: actions/checkout@v3
 
-    - name: run centos7
-      run: docker run -itd -v /root/minicrt:/tmp/minicrt --name centos7Instance --net=host docker.io/centos:7 /bin/bash
     - name: make
-      run: docker exec centos7Instance cd /tmp/minicrt && docker exec centos7Instance make
+      run:  make
     - name: make check
-      run: docker exec centos7Instance make check
+      run:  make check
